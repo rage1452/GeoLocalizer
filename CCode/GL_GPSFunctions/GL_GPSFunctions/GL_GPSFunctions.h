@@ -36,6 +36,13 @@ double GPSdegreeToDouble(char* valueGPS)
 
 char* GPSparseMessage(char* str, char* hour, char* status, char* lat, char* lon, char* latH, char* lonH)
 {
+    /*
+     Parses the GPS message (str) and returning a pre-formatted string. The methods receives several arguments
+     to store the important substrings in the GPS message.
+     @param (char*, char*, char*, char*, char*, char*, char*)
+     @return str w/ a pre-formatted GPS Message.
+     */
+    
     int pntPos;
     int chunkNum = 1;
     char* tmpStr;
@@ -106,56 +113,5 @@ char* GPSparseMessage(char* str, char* hour, char* status, char* lat, char* lon,
     
     return outStr;
 }
-
-/*
-String parseGPSString(String str)
-{
-    int commaPosition;
-    int chunkNum = 1;
-    String tmpStr;
-    
-    commaPosition = str.indexOf(',');
-    
-    tmpStr = str.substring(0,commaPosition);   // asigna subString a tmpStr
-    str = str.substring(commaPosition + 1, str.length());  // borra chunk actual hasta la coma
-    
-    if (tmpStr == etiqueta)
-    {
-        do {
-            commaPosition = str.indexOf(',');
-            
-            if(commaPosition != -1){
-                
-                tmpStr = str.substring(0,commaPosition);   // asigna subString a tmpStr
-                str = str.substring(commaPosition + 1, str.length());  // borra chunk actual hasta la coma
-                
-                //Serial.println(tmpStr);
-                switch(chunkNum){
-                    case 1:    // hora
-                        horaServer = tmpStr;
-                        break;
-                    case 2:    // status
-                        statusGPS = tmpStr;
-                        break;
-                    case 3:    // lat
-                        latitud = tmpStr;
-                        break;
-                    case 4:    // hemlat
-                        hemLat = tmpStr;
-                        break;
-                    case 5:    // long
-                        longitud = tmpStr;
-                        break;
-                    case 6:    // hemlong
-                        hemLong = tmpStr;
-                        break;
-                }
-            }
-            chunkNum++;
-        }while(chunkNum <= 6);
-    } 
-    return (horaServer + " - " + statusGPS + " - " + latitud + " - " + hemLat + " - " + longitud + " - " + hemLong);
-}
-*/
 
 #endif
