@@ -40,14 +40,14 @@ char* GPSparseMessage(char* str, char* hour, char* status, char* lat, char* lon,
     int chunkNum = 1;
     char* tmpStr;
     
-    pntPos = indexOf(str, '.');
+    pntPos = indexOf(str, ',');
     
     tmpStr = getSubString(str, 0, pntPos);
     str = getSubString(str, pntPos + 1, getStrLen(str));
     
     if (strcmp(tmpStr, "$GPRMC") == 0) {
         do{
-            pntPos = indexOf(str, '.');
+            pntPos = indexOf(str, ',');
             
             if (pntPos != -1) {
                 tmpStr = getSubString(str, 0, pntPos);
@@ -88,9 +88,10 @@ char* GPSparseMessage(char* str, char* hour, char* status, char* lat, char* lon,
         }while (chunkNum <= 6);
     }
     
+    
     char outStr[90];
     
-    strcpy(outStr, "$GPRMC");
+    strcpy(outStr, "$GPRMC - ");
     strcat(outStr, hour);
     strcat(outStr, " - ");
     strcat(outStr, status);
@@ -102,9 +103,6 @@ char* GPSparseMessage(char* str, char* hour, char* status, char* lat, char* lon,
     strcat(outStr, lon);
     strcat(outStr, " - ");
     strcat(outStr, lonH);
-    strcat(outStr, " - ");
-
-    printf("%s", outStr);
     
     return outStr;
 }
