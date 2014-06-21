@@ -27,13 +27,17 @@ typedef struct{
     char* lonH;
 }GPSMessage;
 
-char* GPSgetMessage()
+char* GPSgetMessage(void)
 {
     /*
+     Reads the information in the UART buffer and returns a string with the GPS data until its end marked with
+     a char '\n'.
+     @param (void)
+     @return char* w/ containg the information buffer from the UART.
      */
     
     char* gpsMsg = NULL;
-    char* tmpPnt = NULL;
+    char* tmpPtr = NULL;
     char readChar;
     
     int count = 0;
@@ -41,7 +45,15 @@ char* GPSgetMessage()
     while (1) {
         if (UARTisAvailable()) {
             readChar = UARTdataRead();
-            count++;
+            if (readChar != '\n') {
+                count++;
+                tmpPtr = (char*) realloc (gpsMsg, count * sizeof(char));
+                gpsMsg = tmpPtr;
+                gpsMsg[count - 1] = readChar;
+            }
+            else{
+                break;
+            }
         }
     }
     

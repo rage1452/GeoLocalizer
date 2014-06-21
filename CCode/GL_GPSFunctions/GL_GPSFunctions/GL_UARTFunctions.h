@@ -22,8 +22,14 @@ char UARTdebug(void)
     
     static int count = 0;
     
-    if (count++ < 5) {
-        return 'a';
+    // Comment HERE to switch between available and unavailable data!!!
+    //-------------------------------------------------------------------
+    char* testStr = "$GPRMC,155123.000,A,4043.8432,N,07359.7653,W,0.15,83.25,200407,,*28";
+    //char* testStr = "$GPRMC,155123.000,V,,,,,0.15,83.25,200407,,*28";
+    //-------------------------------------------------------------------
+    
+    if (count++ < 67) {
+        return testStr[count-1];
     }
     else{
         count = 0;
