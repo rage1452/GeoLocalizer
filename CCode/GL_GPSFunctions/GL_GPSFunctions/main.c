@@ -9,6 +9,11 @@
 #include <stdio.h>
 #include "GL_GPSFunctions.h"
 
+void changeMsg(GPSMessage* msg)
+{
+    msg->hour = "hola";
+}
+
 int main(int argc, const char * argv[])
 {
     printf("Probando Rutinas con Strings..\n");
@@ -22,24 +27,18 @@ int main(int argc, const char * argv[])
     
     printf("Coordenada Transformada: %.8f\n", gpsCoord);
     
-    char* hour;
-    char* status;
-    char* lat;
-    char* lon;
-    char* latH;
-    char* lonH;
-    
-    // Some Issues...
     char* testStr = "$GPRMC,155123.000,A,4043.8432,N,07359.7653,W,0.15,83.25,200407,,*28";
     
-    printf("Cadena de GPS:\n %s\n", GPSparseMessage(testStr, &hour, &status, &lat, &lon, &latH, &lonH));
+    GPSMessage myMsg;
     
-    printf("%s\n", hour);
-    printf("%s\n", status);
-    printf("%s\n", lat);
-    printf("%s\n", lon);
-    printf("%s\n", latH);
-    printf("%s\n", lonH);
+    printf("Cadena de GPS:\n %s\n", GPSparseMessage(testStr, &myMsg));
+    
+    printf("%s\n", myMsg.hour);
+    printf("%s\n", myMsg.status);
+    printf("%s\n", myMsg.lat);
+    printf("%s\n", myMsg.latH);
+    printf("%s\n", myMsg.lon);
+    printf("%s\n", myMsg.lonH);
     
     return 0;
 }

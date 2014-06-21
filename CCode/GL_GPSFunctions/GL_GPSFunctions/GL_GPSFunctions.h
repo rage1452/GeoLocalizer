@@ -43,7 +43,7 @@ double GPSdegreeToDouble(char* valueGPS)
     
 }
 
-char* GPSparseMessage(char* str, char** hour, char** status, char** lat, char** lon, char** latH, char** lonH)
+char* GPSparseMessage(char* str, GPSMessage *msg)
 {
     /*
      Parses the GPS message (str) and returning a pre-formatted string. The methods receives several arguments
@@ -71,27 +71,28 @@ char* GPSparseMessage(char* str, char** hour, char** status, char** lat, char** 
                 
                 switch (chunkNum) {
                     case 1:
-                        *hour = strCopy(tmpStr);
+                        //*hour = strCopy(tmpStr);
+                        msg->hour = strCopy(tmpStr);
                         break;
                         
                     case 2:
-                        *status = strCopy(tmpStr);
+                        msg->status = strCopy(tmpStr);
                         break;
                         
                     case 3:
-                        *lat = strCopy(tmpStr);
+                        msg->lat = strCopy(tmpStr);
                         break;
                     
                     case 4:
-                        *latH = strCopy(tmpStr);
+                        msg->latH = strCopy(tmpStr);
                         break;
                         
                     case 5:
-                        *lon = strCopy(tmpStr);
+                        msg->lon = strCopy(tmpStr);
                         break;
                         
                     case 6:
-                        *lonH = strCopy(tmpStr);
+                        msg->lonH = strCopy(tmpStr);
                         break;
                         
                     default:
@@ -107,17 +108,17 @@ char* GPSparseMessage(char* str, char** hour, char** status, char** lat, char** 
     char outStr[90];
     
     strcpy(outStr, "$GPRMC - ");
-    strcat(outStr, *hour);
+    strcat(outStr, msg->hour);
     strcat(outStr, " - ");
-    strcat(outStr, *status);
+    strcat(outStr, msg->status);
     strcat(outStr, " - ");
-    strcat(outStr, *lat);
+    strcat(outStr, msg->lat);
     strcat(outStr, " - ");
-    strcat(outStr, *latH);
+    strcat(outStr, msg->latH);
     strcat(outStr, " - ");
-    strcat(outStr, *lon);
+    strcat(outStr, msg->lon);
     strcat(outStr, " - ");
-    strcat(outStr, *lonH);
+    strcat(outStr, msg->lonH);
     
     return outStr;
 }
