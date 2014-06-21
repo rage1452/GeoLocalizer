@@ -31,7 +31,15 @@ int main(int argc, const char * argv[])
     
     // Some Issues...
     char* testStr = "$GPRMC,155123.000,A,4043.8432,N,07359.7653,W,0.15,83.25,200407,,*28";
-    printf("Cadena de GPS:\n %s\n", GPSparseMessage(testStr, hour, status, lat, lon, latH, lonH));
+    
+    printf("Cadena de GPS:\n %s\n", GPSparseMessage(testStr, &hour, &status, &lat, &lon, &latH, &lonH));
+    
+    printf("%s\n", hour);
+    printf("%s\n", status);
+    printf("%s\n", lat);
+    printf("%s\n", lon);
+    printf("%s\n", latH);
+    printf("%s\n", lonH);
     
     return 0;
 }

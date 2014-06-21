@@ -12,6 +12,15 @@
 #include "GP_STRFunctions.h"
 #include <math.h>
 
+typedef struct{
+    char* hour;
+    char* status;
+    char* lat;
+    char* lon;
+    char* latH;
+    char* lonH;
+}GPSMessage;
+
 double GPSdegreeToDouble(char* valueGPS)
 {
     /*
@@ -34,7 +43,7 @@ double GPSdegreeToDouble(char* valueGPS)
     
 }
 
-char* GPSparseMessage(char* str, char* hour, char* status, char* lat, char* lon, char* latH, char* lonH)
+char* GPSparseMessage(char* str, char** hour, char** status, char** lat, char** lon, char** latH, char** lonH)
 {
     /*
      Parses the GPS message (str) and returning a pre-formatted string. The methods receives several arguments
@@ -62,27 +71,27 @@ char* GPSparseMessage(char* str, char* hour, char* status, char* lat, char* lon,
                 
                 switch (chunkNum) {
                     case 1:
-                        hour = tmpStr;
+                        *hour = strCopy(tmpStr);
                         break;
                         
                     case 2:
-                        status = tmpStr;
+                        *status = strCopy(tmpStr);
                         break;
                         
                     case 3:
-                        lat = tmpStr;
+                        *lat = strCopy(tmpStr);
                         break;
                     
                     case 4:
-                        latH = tmpStr;
+                        *latH = strCopy(tmpStr);
                         break;
                         
                     case 5:
-                        lon = tmpStr;
+                        *lon = strCopy(tmpStr);
                         break;
                         
                     case 6:
-                        lonH = tmpStr;
+                        *lonH = strCopy(tmpStr);
                         break;
                         
                     default:
@@ -95,21 +104,20 @@ char* GPSparseMessage(char* str, char* hour, char* status, char* lat, char* lon,
         }while (chunkNum <= 6);
     }
     
-    
     char outStr[90];
     
     strcpy(outStr, "$GPRMC - ");
-    strcat(outStr, hour);
+    strcat(outStr, *hour);
     strcat(outStr, " - ");
-    strcat(outStr, status);
+    strcat(outStr, *status);
     strcat(outStr, " - ");
-    strcat(outStr, lat);
+    strcat(outStr, *lat);
     strcat(outStr, " - ");
-    strcat(outStr, latH);
+    strcat(outStr, *latH);
     strcat(outStr, " - ");
-    strcat(outStr, lon);
+    strcat(outStr, *lon);
     strcat(outStr, " - ");
-    strcat(outStr, lonH);
+    strcat(outStr, *lonH);
     
     return outStr;
 }

@@ -77,6 +77,16 @@ int getStrLen(char* str)
     return i;
 }
 
+
+char* strCopy(char* str)
+{
+    /*
+     Return a new allocated copy of the string 'str'.
+     */
+    
+    return getSubString(str, 0, getStrLen(str));
+}
+
 double str2Double(const char* c)
 {
     /*
