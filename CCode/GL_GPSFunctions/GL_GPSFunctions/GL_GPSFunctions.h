@@ -21,6 +21,23 @@ typedef struct{
     char* lonH;
 }GPSMessage;
 
+int GPSisOK(GPSMessage msg)
+{
+    /*
+     Returns the status of the satellite server.
+     @param (GPSMessage)
+     @return int w/ '1' if the server is active, '-1' otherwise.
+     */
+    
+    if (strcmp(msg.status, "A") == 0) {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 double GPSdegreeToDouble(char* valueGPS)
 {
     /*
@@ -40,6 +57,78 @@ double GPSdegreeToDouble(char* valueGPS)
     deg = getSubString(valueGPS, 0, pos - 2);
     
     return str2Double(deg) + str2Double(min)/60.0 + str2Double(dec)/(60 * pow(10.0, (double)getStrLen(dec)));
+    
+}
+
+double GPSgetCordinate(char* valueGPS, char* hem)
+{
+    /*
+     Wrapper function to assign the correct sign to the information in the GPSValue.
+     When hem is South (S) or West(W) the GPS coordinates must be negative, possitive 
+     otherwise.
+     @param (char*, char*)
+     @return double w/ the correct sign.
+     */
+    
+    double value = GPSdegreeToDouble(valueGPS);
+    
+    if (strcmp(hem, "S") == 0 || strcmp(hem, "W") == 0) {
+        value *= -1;
+    }
+    
+    return value;
+}
+
+double GPSgetLat(GPSMessage msg)
+{
+    /*
+     Returns the double value of the Latitude.
+     @param (GPSMessage)
+     @return double w/ latitude. Returns -1 if the server is innactive.
+     */
+    
+    if (GPSisOK(msg)) {
+        return GPSgetCordinate(msg.lat, msg.latH);
+    }
+    else{
+        return -1;
+    }
+}
+
+double GPSgetLon(GPSMessage msg)
+{
+    /*
+     Returns the double value of the Longitude.
+     @param (GPSMessage)
+     @return double w/ longitude. Returns -1 if the server is innactive.
+     */
+    
+    if (GPSisOK(msg)) {
+        return GPSgetCordinate(msg.lon, msg.lonH);
+    }
+    else{
+        return -1;
+    }
+    
+}
+
+char* GPSgetHour(GPSMessage msg)
+{
+    /*
+     Returns the hour is a formar hh:mm:ss.
+     @param (GPSMessage)
+     @return char* w/ the current satellite's hour.
+     */
+    
+    char* tmpHour = malloc(6 * sizeof(char));
+    
+    strcpy(tmpHour, getSubString(msg.hour, 0, 2));
+    strcat(tmpHour, ":");
+    strcat(tmpHour, getSubString(msg.hour, 2, 4));
+    strcat(tmpHour, ":");
+    strcat(tmpHour, getSubString(msg.hour, 4, 6));
+    
+    return tmpHour;
     
 }
 
