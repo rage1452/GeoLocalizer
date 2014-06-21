@@ -10,6 +10,9 @@ Currently in development...
 Main Contributors:
 -------------------
 Mario Coutino
+
 Alexis Otano
+
 Rafael Gutierrez
+
 Manuel Hernadez
