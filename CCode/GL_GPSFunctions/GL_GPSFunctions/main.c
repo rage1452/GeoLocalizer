@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include "GL_GPSFunctions.h"
+#include "GL_UARTFunctions.h"
 
 void changeMsg(GPSMessage* msg)
 {

@@ -1,13 +1,13 @@
 //
-//  GP_STRFunctions.h
+//  GL_STRFunctions.h
 //  GL_GPSFunctions
 //
 //  Created by Mario Coutino on 6/20/14.
 //  Copyright (c) 2014 Mario Coutino. All rights reserved.
 //
 
-#ifndef GL_GPSFunctions_GP_STRFunctions_h
-#define GL_GPSFunctions_GP_STRFunctions_h
+#ifndef GL_GPSFunctions_GL_STRFunctions_h
+#define GL_GPSFunctions_GL_STRFunctions_h
 
 #include <stdlib.h>
 #include <string.h>
