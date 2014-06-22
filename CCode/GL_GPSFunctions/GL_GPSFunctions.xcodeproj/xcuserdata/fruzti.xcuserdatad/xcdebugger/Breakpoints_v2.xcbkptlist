@@ -57,8 +57,15 @@
             timestampString = "425069491.653319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "174"
             endingLineNumber = "174">
+=======
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "GPSgetHour(GPSMessage msg)"
+            landmarkType = "7">
+>>>>>>> pr/1
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -87,8 +94,13 @@
             timestampString = "425069491.653319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "112"
             endingLineNumber = "112"
+=======
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+>>>>>>> pr/1
             landmarkName = "GPSgetCordinate(char* valueGPS, char* hem)"
             landmarkType = "7">
          </BreakpointContent>
@@ -103,6 +115,7 @@
             timestampString = "425069491.653319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "46"
             endingLineNumber = "46"
             landmarkName = "GPSgetMessage()"
@@ -138,6 +151,11 @@
             startingLineNumber = "232"
             endingLineNumber = "232"
             landmarkName = "GPSparseMessage(char* str, GPSMessage *msg)"
+=======
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "GPSgetMessage(void)"
+>>>>>>> pr/1
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -151,9 +169,15 @@
             timestampString = "425069491.653319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "48"
             endingLineNumber = "48"
             landmarkName = "GPSgetMessage()"
+=======
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "GPSgetMessage(void)"
+>>>>>>> pr/1
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
