@@ -9,8 +9,14 @@
 #ifndef GL_GPSFunctions_GL_GPSFunctions_h
 #define GL_GPSFunctions_GL_GPSFunctions_h
 
-#include "GP_STRFunctions.h"
+#include "GL_STRFunctions.h"
+#include "GL_UARTFunctions.h"
+
 #include <math.h>
+
+#define GPS_ON 1
+#define GPS_OFF 0
+#define GPS_ERROR -1
 
 typedef struct{
     char* hour;
@@ -21,6 +27,39 @@ typedef struct{
     char* lonH;
 }GPSMessage;
 
+char* GPSgetMessage(void)
+{
+    /*
+     Reads the information in the UART buffer and returns a string with the GPS data until its end marked with
+     a char '\n'.
+     @param (void)
+     @return char* w/ containg the information buffer from the UART.
+     */
+    
+    char* gpsMsg = NULL;
+    char* tmpPtr = NULL;
+    char readChar;
+    
+    int count = 0;
+    
+    while (1) {
+        if (UARTisAvailable()) {
+            readChar = UARTdataRead();
+            if (readChar != '\n') {
+                count++;
+                tmpPtr = (char*) realloc (gpsMsg, count * sizeof(char));
+                gpsMsg = tmpPtr;
+                gpsMsg[count - 1] = readChar;
+            }
+            else{
+                break;
+            }
+        }
+    }
+    
+    return gpsMsg;
+}
+
 int GPSisOK(GPSMessage msg)
 {
     /*
@@ -30,11 +69,11 @@ int GPSisOK(GPSMessage msg)
      */
     
     if (strcmp(msg.status, "A") == 0) {
-        return 1;
+        return GPS_ON;
     }
     else
     {
-        return 0;
+        return GPS_OFF;
     }
 }
 
@@ -91,7 +130,7 @@ double GPSgetLat(GPSMessage msg)
         return GPSgetCordinate(msg.lat, msg.latH);
     }
     else{
-        return -1;
+        return GPS_ERROR;
     }
 }
 
@@ -107,7 +146,7 @@ double GPSgetLon(GPSMessage msg)
         return GPSgetCordinate(msg.lon, msg.lonH);
     }
     else{
-        return -1;
+        return GPS_ERROR;
     }
     
 }
@@ -194,7 +233,8 @@ char* GPSparseMessage(char* str, GPSMessage *msg)
         }while (chunkNum <= 6);
     }
     
-    char outStr[90];
+    
+    char* outStr = malloc(60 * sizeof(char));
     
     strcpy(outStr, "$GPRMC - ");
     strcat(outStr, msg->hour);
@@ -207,9 +247,11 @@ char* GPSparseMessage(char* str, GPSMessage *msg)
     strcat(outStr, " - ");
     strcat(outStr, msg->lon);
     strcat(outStr, " - ");
-    strcat(outStr, msg->lonH);
+    return strcat(outStr, msg->lonH);
     
-    return outStr;
+    
 }
+
+
 
 #endif

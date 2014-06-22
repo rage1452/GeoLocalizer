@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include "GL_GPSFunctions.h"
+#include "GL_UARTFunctions.h"
 
 void changeMsg(GPSMessage* msg)
 {
@@ -27,8 +28,10 @@ int main(int argc, const char * argv[])
     
     printf("Coordenada Transformada: %.8f\n", gpsCoord);
     
-    char* testStr = "$GPRMC,155123.000,A,4043.8432,N,07359.7653,W,0.15,83.25,200407,,*28";
-    //char* testStr = "$GPRMC,155123.000,V,,,,,0.15,83.25,200407,,*28";
+    char* testStr = GPSgetMessage(); // To switch between the two GPS string available
+                                     // one with satellite data and one without, it is
+                                     // necessary to comment the char* declaration
+                                     // in the UARTdebug() function.
     
     GPSMessage myMsg;
     
@@ -45,6 +48,8 @@ int main(int argc, const char * argv[])
     printf("Longitud(Degrees):\t %.8f\n", GPSgetLon(myMsg));
     printf("Hora Local: \t\t%s\n",GPSgetHour(myMsg));
     printf("Servicio: \t\t%d\n",GPSisOK(myMsg));
+    
+    printf("%s\n",GPSgetMessage());
     
     return 0;
 }
