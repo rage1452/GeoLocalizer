@@ -29,7 +29,8 @@
 		DA8E62EF1953DCD70065C837 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		DA8E62F11953DCD70065C837 /* GL_GPSFunctions.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = GL_GPSFunctions.1; sourceTree = "<group>"; };
 		DA8E62F81953DD570065C837 /* GL_GPSFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GL_GPSFunctions.h; sourceTree = "<group>"; };
-		DA8E62F91953F9410065C837 /* GP_STRFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GP_STRFunctions.h; sourceTree = "<group>"; };
+		DA8E62F91953F9410065C837 /* GL_STRFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GL_STRFunctions.h; sourceTree = "<group>"; };
+		DA8E62FA1955FB310065C837 /* GL_UARTFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GL_UARTFunctions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +65,8 @@
 			children = (
 				DA8E62EF1953DCD70065C837 /* main.c */,
 				DA8E62F81953DD570065C837 /* GL_GPSFunctions.h */,
-				DA8E62F91953F9410065C837 /* GP_STRFunctions.h */,
+				DA8E62F91953F9410065C837 /* GL_STRFunctions.h */,
+				DA8E62FA1955FB310065C837 /* GL_UARTFunctions.h */,
 				DA8E62F11953DCD70065C837 /* GL_GPSFunctions.1 */,
 			);
 			path = GL_GPSFunctions;
